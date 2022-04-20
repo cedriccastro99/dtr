@@ -19,6 +19,7 @@
                 $_SESSION['username'] = $username;
                 $_SESSION['user_id'] = $result[0]['user_id'];
                 $_SESSION['fullname'] = $result[0]['fullname'];
+                $_SESSION['agency'] = $result[0]['agency'];
 
                 echo "logged in";
             }else{

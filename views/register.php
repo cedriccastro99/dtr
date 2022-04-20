@@ -48,7 +48,7 @@
         </div>
         <div class="mb-3">
             <label for="agency" class="form-label">Agency</label>
-            <input name="agency" id="agency" type="text" class="form-control" placeholder="Enter username">
+            <input name="agency" id="agency" type="text" class="form-control" placeholder="Enter agency">
         </div>
         <span id="alert_box">
         </span>
