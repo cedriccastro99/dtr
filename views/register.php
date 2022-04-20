@@ -44,11 +44,11 @@
         </div>
         <div class="mb-3">
             <label for="fullname" class="form-label">Fullname</label>
-            <input name="fullname" id="fullname" type="fullname" class="form-control" placeholder="Enter fullname">
+            <input name="fullname" id="fullname" type="text" class="form-control" placeholder="Enter fullname">
         </div>
         <div class="mb-3">
             <label for="agency" class="form-label">Agency</label>
-            <input name="agency" id="agency" type="agency" class="form-control" placeholder="Enter username">
+            <input name="agency" id="agency" type="text" class="form-control" placeholder="Enter username">
         </div>
         <span id="alert_box">
         </span>
