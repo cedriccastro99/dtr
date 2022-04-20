@@ -1,0 +1,18 @@
+#login-form{
+    margin-top: 9%;
+    width: 30%;
+    border: solid 1px;
+    padding: 35px;
+    border-radius: 10px;
+    border-color: darkolivegreen;
+}
+
+#login-button{
+    width: 100%;
+    margin-top:10px;  
+    margin-bottom:20px;  
+}
+
+.alert{
+    display:none;
+}
