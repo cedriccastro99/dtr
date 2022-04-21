@@ -1,0 +1,5 @@
+#table-container{
+    display:block;
+    overflow:auto;
+    height:90vh
+}
