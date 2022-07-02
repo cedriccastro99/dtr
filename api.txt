@@ -1,0 +1,5 @@
+$.getJSON("https://holidays.abstractapi.com/v1/?api_key=9deb86c34d1b4696b7ff6379ff650079&country=US&year=2020&month=12&day=25", function(data) {
+    console.log(data);
+})
+
+api  = https://calendarific.com/api/v2/holidays?api_key=499b14be2ab015a560edd2aae50ba23d174ffb93&country=PH&year=2022

@@ -15,7 +15,14 @@
             $month = $_POST['data']['month'];
             $year = $_POST['data']['year'];
 
-            $sql = "INSERT INTO entry (user_id,month,day,year,am_in) VALUES('$userid','$month','$day','$year','$time')" ;
+            $setup = $_POST['data']['setup'];
+            
+            if($setup == '1'){
+                $sql = "INSERT INTO entry (user_id,month,day,year,am_in,setup) VALUES('$userid','$month','$day','$year','$time','$setup')" ;
+            }else{
+                $sql = "INSERT INTO entry (user_id,month,day,year,am_in,am_out,pm_in,pm_out,setup) VALUES('$userid','$month','$day','$year','$time','$time','$time','$time','$setup')" ;
+            }
+            
             mysqli_query($con,$sql);
 
             $sql = "SELECT * FROM  entry WHERE `user_id` = $userid AND `month` = '$month' AND `day` = '$day' AND `year` = '$year'";

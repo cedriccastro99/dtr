@@ -20,7 +20,7 @@
                 $_SESSION['user_id'] = $result[0]['user_id'];
                 $_SESSION['fullname'] = $result[0]['fullname'];
                 $_SESSION['agency'] = $result[0]['agency'];
-
+                $_SESSION['profile_pic'] = $result[0]['profile_picture'];
                 echo "logged in";
             }else{
                 echo "wrong password";

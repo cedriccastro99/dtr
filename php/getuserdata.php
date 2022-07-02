@@ -29,6 +29,19 @@
 
         echo json_encode($result);
         exit();
+    }else if(isset($_SESSION['user_id']) && $_GET['action'] == 'getprintrecords'){
+
+        $userid = $_SESSION['user_id'];
+        $year = $_GET['data']['year'];
+        $month = $_GET['data']['month'];
+        $from = $_GET['data']['from'];
+        $to = $_GET['data']['to'];
+
+        $sql = "SELECT * FROM `entry` WHERE user_id = $userid AND month = $month AND year = $year AND day >= $from AND day <= $to";
+        $stm = $pdo->query($sql);
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        exit();
     }
 
 ?>

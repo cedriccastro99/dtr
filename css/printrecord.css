@@ -1,0 +1,13 @@
+.user-record{
+    width: 100%;
+}
+
+#records-table{
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+.print-button{
+    max-width: 50em;
+    margin: 0 auto;
+}

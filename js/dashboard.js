@@ -15,6 +15,7 @@ function getDateToday(){
 $(document).ready(function(){
     
     var userEntry;
+    const toast = $('#liveToast');
 
     setInterval(()=>{
         const date = new Date();
@@ -56,6 +57,8 @@ $(document).ready(function(){
 
         const { am_in,am_out,pm_in,pm_out } = entry[0]; 
         
+        $('#setup-select').hide()
+
         if(am_in !== null && am_out == null){
             btnContainer.append(buttons.am_out);
         }else if(am_in !== null && am_out !== null && pm_in == null){
@@ -67,7 +70,7 @@ $(document).ready(function(){
         }
     }
 
-    function message(type){
+    function message(type,setup){
         const date = new Date();
 
         const alertBox = $('#alert-container').empty();
@@ -75,12 +78,21 @@ $(document).ready(function(){
         const timein_success = `<div class="text-center alert alert-success ds-alert" role="alert">
             Time in at ${date.toLocaleString('en-US', { hour12: true })}
         </div>`;
+        const work_from_home = `<div class="text-center alert alert-success ds-alert" role="alert">
+            Working from home
+        </div>`;
         const timeout_success = `<div class="text-center alert alert-success ds-alert" role="alert">
             Time out at ${date.toLocaleString('en-US', { hour12: true })}
         </div>`;
 
         if(type == 'in'){
-            alertBox.append(timein_success);
+
+            if(setup === '2'){
+                alertBox.append(work_from_home);
+            }else{
+                alertBox.append(timein_success);
+            }
+
 
             $('.ds-alert').fadeIn('slow');
     
@@ -128,26 +140,36 @@ $(document).ready(function(){
     
 
     $(document).on('click','#timein',function(){
+
+        const setup = $('#user-setup').val();
         if(userEntry.length === 0){
-            const { day,month,year,time } = getDateToday();
-            
-            const dateToday = {
-                day : day,
-                month : month,
-                year : year,
-                time : time,
-                type : 'am_in'
-            }
-            $.ajax({
-                method : 'POST',
-                url : './php/usertimein.php',
-                data : { data:dateToday , action:'timein' },
-                success : function(data){
-                    userEntry = jQuery.parseJSON(data);
-                    message('in');
-                    checkEntry(userEntry);
+            if(setup === ''){
+                toast.show()
+                setTimeout(()=>{
+                    toast.hide()
+                },1500)
+            }else{
+                const { day,month,year,time } = getDateToday();
+                
+                const dateToday = {
+                    day : day,
+                    month : month,
+                    year : year,
+                    time : time,
+                    type : 'am_in',
+                    setup : setup
                 }
-            })
+                $.ajax({
+                    method : 'POST',
+                    url : './php/usertimein.php',
+                    data : { data:dateToday , action:'timein' },
+                    success : function(data){
+                        userEntry = jQuery.parseJSON(data);
+                        message('in',setup);
+                        checkEntry(userEntry);
+                    }
+                })
+            }
         }else{
             const { time } = getDateToday();
 
@@ -168,6 +190,7 @@ $(document).ready(function(){
                 }
             })
         }
+        
     })
 
     $(document).on('click','#timeout',function(){

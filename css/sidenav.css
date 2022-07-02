@@ -5,10 +5,17 @@
 #profile{
     height: 170px;
     width: 170px;
-    border-radius: 180px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
     overflow: hidden;
-    background-image: url('../image/default-profile-picture.jpg');
-    background-size: contain;
+}
+
+#profile img{
+    height: 170px;
+    width: 170px;
 }
 
 #profile-component{
@@ -23,4 +30,33 @@
 
 .ds-alert{
     display:none;
+}
+
+#upload-btn{
+    height: 40px;
+    width : 40px;
+    margin-top: 80%;
+    margin-left : -50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+#upload-btn img{
+    height: 25px;
+    width : 25px;
+    padding: 0px;
+}
+
+#profileImage
+{
+    cursor: pointer;
+}
+
+#profileImg{
+    height: 200px;
+    width : 200px;
 }
