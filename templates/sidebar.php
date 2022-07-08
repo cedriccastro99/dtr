@@ -14,6 +14,9 @@
                 }else if(localData === 'printrecords'){
                     const link = $(navLink).filter(function(){ return $(this).text() === 'Print Records' });
                     $(link).parent().addClass('active')
+                }else if(localData === 'workaccomplished'){
+                    const link = $(navLink).filter(function(){ return $(this).text() === 'Work Accomplished' });
+                    $(link).parent().addClass('active')
                 }
             })
         </script>
@@ -46,26 +49,26 @@
                     </div>
             
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0">
-                    <!-- <li class="nav-item">
-                        <a href="#" class="nav-link text-truncate border-end-0">
-                            <span class="ms-2 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a href="./index.php" class="nav-link text-truncate border-end-0">
-                            <span class="ms-2 d-none d-sm-inline">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./records.php" class="nav-link text-truncate border-end-0">
-                            <span class="ms-2 d-none d-sm-inline">Records</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./printrecords.php" class="nav-link text-truncate border-end-0">
-                            <span class="ms-2 d-none d-sm-inline">Print Records</span>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a href="./index.php" class="nav-link text-truncate border-end-0">
+                                <span class="ms-2 d-none d-sm-inline">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./records.php" class="nav-link text-truncate border-end-0">
+                                <span class="ms-2 d-none d-sm-inline">Records</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./printrecords.php" class="nav-link text-truncate border-end-0">
+                                <span class="ms-2 d-none d-sm-inline">Print Records</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./workaccomplished.php" class="nav-link text-truncate border-end-0">
+                                <span class="ms-2 d-none d-sm-inline">Work Accomplished</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="d-flex justify-content-center mb-5">
                         <button class="btn btn-danger" id="logout-btn">Sign Out</button>

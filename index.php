@@ -40,7 +40,6 @@
             </span>
             <div class="d-flex justify-content-center" id="time-in-out">
                 <div>
-                    
                     <span>
                         <h2 id="clock"></h2>
                     </span>
@@ -51,9 +50,15 @@
                             <option value="2">Work from home</option>
                         </select>
                     </span>
-                    <div class="d-flex justify-content-center">
-                        <span class="mb-1" id="btn-container">
+                    <div>
+                    </div>
+                    <div>
+                        <span id="work-accomplised-textfield">
                         </span>
+                        <div class="d-flex justify-content-center">
+                            <span class="mb-1" id="btn-container">
+                            </span>
+                        </div>
                     </div>
                     <span id="alert-container">
                     </span>
@@ -63,40 +68,9 @@
     </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal fade" id="UploadProfile" tabindex="-1" aria-labelledby="UploadProfileLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="UploadProfileLabel">Upload profile picture</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <input id="imageUpload" type="file" 
-                    name="profile_photo" placeholder="Photo" class="form-control mb-3">
-                    <center>
-                        <div id="image-preview" class="mb-3">
-                            
-                        </div>
-                        <button class="btn btn-primary">Upload</button>
-                    </center>
-                </div>
-            </div>
-        </div>
-  </div>
-</div>
-<div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
-    <div class="toast-container position-absolute top-0 start-50 translate-middle-x" id="toastPlacement">
-        <div id="liveToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Please select your set-up
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
+
+<?php include('./templates/toasts.php') ?>
+
 
 </body>
 </html>

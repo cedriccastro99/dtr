@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2022 at 08:29 PM
+-- Generation Time: Jul 08, 2022 at 08:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `dtr`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accomplished_work`
+--
+
+CREATE TABLE `accomplished_work` (
+  `work_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `accomplished_work` varchar(1000) NOT NULL,
+  `month` varchar(255) NOT NULL,
+  `day` varchar(255) NOT NULL,
+  `year` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `accomplished_work`
+--
+
+INSERT INTO `accomplished_work` (`work_id`, `user_id`, `accomplished_work`, `month`, `day`, `year`) VALUES
+(7, 2, 'accomplished', '07', '07', '2022'),
+(8, 2, 'Finish this project', '07', '09', '2022'),
+(9, 3, 'Finish OJT', '07', '09', '2022');
 
 -- --------------------------------------------------------
 
@@ -61,7 +85,10 @@ INSERT INTO `entry` (`entry_id`, `user_id`, `month`, `day`, `year`, `am_in`, `am
 (39, 1, '07', '02', '2022', '2:19:56 AM', '2:19:56 AM', '2:19:56 AM', '2:19:56 AM', 2),
 (42, 3, '07', '02', '2022', '3:53:02 AM', '3:53:02 AM', '3:53:02 AM', '3:53:02 AM', 2),
 (43, 3, '07', '03', '2022', '1:13:11 AM', '1:13:13 AM', '1:13:14 AM', '1:13:15 AM', 1),
-(44, 2, '07', '03', '2022', '2:19:11 AM', '2:19:12 AM', '2:19:13 AM', '2:19:14 AM', 1);
+(44, 2, '07', '03', '2022', '2:19:11 AM', '2:19:12 AM', '2:19:13 AM', '2:19:14 AM', 1),
+(50, 2, '07', '07', '2022', '2:06:23 AM', '2:06:23 AM', '2:06:23 AM', '2:06:23 AM', 2),
+(51, 2, '07', '09', '2022', '1:58:30 AM', '1:58:31 AM', '1:58:32 AM', '1:58:40 AM', 1),
+(52, 3, '07', '09', '2022', '2:13:19 AM', '2:13:19 AM', '2:13:19 AM', '2:13:19 AM', 2);
 
 -- --------------------------------------------------------
 
@@ -94,6 +121,13 @@ INSERT INTO `users` (`user_id`, `profile_picture`, `username`, `password`, `full
 --
 
 --
+-- Indexes for table `accomplished_work`
+--
+ALTER TABLE `accomplished_work`
+  ADD PRIMARY KEY (`work_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `entry`
 --
 ALTER TABLE `entry`
@@ -111,10 +145,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `accomplished_work`
+--
+ALTER TABLE `accomplished_work`
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `entry`
 --
 ALTER TABLE `entry`
-  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `entry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -127,10 +167,16 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `accomplished_work`
+--
+ALTER TABLE `accomplished_work`
+  ADD CONSTRAINT `accomplished_work_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `entry`
 --
 ALTER TABLE `entry`
-  ADD CONSTRAINT `user_id fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `user_id fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

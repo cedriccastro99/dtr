@@ -16,15 +16,21 @@
             $year = $_POST['data']['year'];
 
             $setup = $_POST['data']['setup'];
+
+            $accomplished = '';
             
             if($setup == '1'){
                 $sql = "INSERT INTO entry (user_id,month,day,year,am_in,setup) VALUES('$userid','$month','$day','$year','$time','$setup')" ;
+                mysqli_query($con,$sql);
             }else{
+                $accomplished = $_POST['data']['accomplished'];
                 $sql = "INSERT INTO entry (user_id,month,day,year,am_in,am_out,pm_in,pm_out,setup) VALUES('$userid','$month','$day','$year','$time','$time','$time','$time','$setup')" ;
+                mysqli_query($con,$sql);
+
+                $sql = "INSERT INTO `accomplished_work`(`user_id`, `accomplished_work`, `month`, `day`, `year`) VALUES ('$userid','$accomplished','$month','$day','$year')";
+                mysqli_query($con,$sql);
             }
             
-            mysqli_query($con,$sql);
-
             $sql = "SELECT * FROM  entry WHERE `user_id` = $userid AND `month` = '$month' AND `day` = '$day' AND `year` = '$year'";
             $stm = $pdo->query($sql);
             $result = $stm->fetchAll(PDO::FETCH_ASSOC);

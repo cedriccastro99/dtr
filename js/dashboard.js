@@ -12,9 +12,16 @@ function getDateToday(){
 
 }
 
+let textarea = `
+                <div class="form-floating mb-2">
+                    <textarea id="work-accomplised" class="form-control" placeholder="Work Accomplished" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Work Accomplished</label>
+                </div>
+                `;
+
 $(document).ready(function(){
     
-    var userEntry;
+    let userEntry;
     const toast = $('#liveToast');
 
     setInterval(()=>{
@@ -38,10 +45,10 @@ $(document).ready(function(){
     function checkEntry(entry){
 
         const buttons = {
-            am_in : `<button class="btn btn-primary" id="timein">Time in AM</button>`,
-            am_out: `<button class="btn btn-danger" id="timeout">Time out AM</button>`,
-            pm_in : `<button class="btn btn-primary" id="timein">Time in PM</button>`,
-            pm_out: `<button class="btn btn-danger" id="timeout">Time out PM</button>`,
+            am_in : `<button type="submit" class="btn btn-primary" id="timein">Time in AM</button>`,
+            am_out: `<button type="submit" class="btn btn-danger" id="timeout">Time out AM</button>`,
+            pm_in : `<button type="submit" class="btn btn-primary" id="timein">Time in PM</button>`,
+            pm_out: `<button type="submit" class="btn btn-danger" id="timeout">Time out PM</button>`,
             done : `<div class="alert alert-success" role="alert">
                         Comeback tommorow for your daily records.
                     </div>`
@@ -64,8 +71,13 @@ $(document).ready(function(){
         }else if(am_in !== null && am_out !== null && pm_in == null){
             btnContainer.append(buttons.pm_in);
         }else if(am_in !== null && am_out !== null && pm_in !== null && pm_out == null){
+            let textfield = $('#work-accomplised-textfield').empty()
+
+            textfield.append(textarea);
+
             btnContainer.append(buttons.pm_out);
         }else{
+            $('#work-accomplised-textfield').empty()
             btnContainer.append(buttons.done);
         }
     }
@@ -134,21 +146,37 @@ $(document).ready(function(){
             }
         })
     }
-
     
     getTimeInOutData()
-    
 
     $(document).on('click','#timein',function(){
 
         const setup = $('#user-setup').val();
+        const toastBody = $('.toast-body').empty()
+
         if(userEntry.length === 0){
             if(setup === ''){
+                toastBody.text('Please select your set-up')
                 toast.show()
                 setTimeout(()=>{
                     toast.hide()
                 },1500)
             }else{
+
+                let accomplished = ''
+                
+                if(setup === '2' || setup === 2){
+                    accomplished = $('#work-accomplised').val()
+                    if(accomplished === ''){
+                        toastBody.text('Please input your accomplished work for today!')
+                        toast.show()
+                        setTimeout(()=>{
+                            toast.hide()
+                        },1500)
+                        return
+                    }
+                }
+
                 const { day,month,year,time } = getDateToday();
                 
                 const dateToday = {
@@ -157,7 +185,8 @@ $(document).ready(function(){
                     year : year,
                     time : time,
                     type : 'am_in',
-                    setup : setup
+                    setup : setup,
+                    accomplished
                 }
                 $.ajax({
                     method : 'POST',
@@ -213,11 +242,31 @@ $(document).ready(function(){
                 }
             })
         }else{
-            const { time } = getDateToday();
+
+            const toastBody = $('.toast-body').empty()
+
+            let accomplished = ''
+                
+            accomplished = $('#work-accomplised').val()
+
+            if(accomplished === ''){
+                toastBody.text('Please input your accomplished work for today!')
+                toast.show()
+                setTimeout(()=>{
+                    toast.hide()
+                },1500)
+                return
+            }
+
+            const { day,month,year,time } = getDateToday();
             const dateToday = {
                 entry : userEntry[0].entry_id,
+                day : day,
+                month : month,
+                year : year,
                 time : time,
-                type : 'pm_out'
+                type : 'pm_out',
+                accomplished
             }
 
             $.ajax({
@@ -230,6 +279,16 @@ $(document).ready(function(){
                     checkEntry(userEntry);
                 }
             })
+        }
+    })
+
+    $('#user-setup').on('change',function(){
+        let setup = $(this).val();
+
+        let textfield = $('#work-accomplised-textfield').empty()
+
+        if(setup === 2 || setup === '2'){
+            textfield.append(textarea)
         }
     })
 

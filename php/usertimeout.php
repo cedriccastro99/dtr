@@ -32,6 +32,12 @@
             }
         }else if($type === 'pm_out'){
             try {
+
+                $day = $_POST['data']['day'];
+                $month = $_POST['data']['month'];
+                $year = $_POST['data']['year'];
+
+                $accomplished = $_POST['data']['accomplished'];
 			
                 $pdo->beginTransaction();
                 $prepared_statement = $pdo->prepare("UPDATE entry SET `pm_out` = ?  WHERE `entry_id` = ? AND `user_id` = ?");
@@ -39,6 +45,9 @@
                 $prepared_statement->execute(array($time,$entry,$userid));
     
                 $pdo->commit();
+
+                $sql = "INSERT INTO `accomplished_work`(`user_id`, `accomplished_work`, `month`, `day`, `year`) VALUES ('$userid','$accomplished','$month','$day','$year')";
+                mysqli_query($con,$sql);
     
                 $sql = "SELECT * FROM  entry WHERE `user_id` = $userid AND `entry_id` = $entry";
                 $stm = $pdo->query($sql);
