@@ -115,6 +115,8 @@ $(document).ready(function(){
                 const tbody = $('#table-record-body').empty();
                 const works = JSON.parse(data);
 
+                
+
                 $('.spinner').addClass('d-none');
                 $('.print-button').removeClass('d-none');
                 $('.print-record').removeClass('d-none');
@@ -149,18 +151,5 @@ $(document).ready(function(){
 
     $('#print').on('click',function(){
         $('.print-record').printThis()
-    })
-
-    $('#logout-btn').on('click',function(){
-        $.ajax({
-            method : 'POST',
-            url : './php/logout.php',
-            data : {action : 'logout'},
-            success : function(data){
-                if(data === 'logout'){
-                    window.location = "./views/login.php"
-                }
-            }         
-        })
     })
 })

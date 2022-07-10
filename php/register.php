@@ -8,6 +8,7 @@
         $password = $_POST['data']['password'];
         $fullname = $_POST['data']['fullname'];
         $agency = $_POST['data']['agency'];
+        $role = $_POST['data']['role'];
 
         $query = "SELECT * FROM users WHERE username = '$username'";
 
@@ -24,9 +25,10 @@
     		$password =  mysqli_real_escape_string($con,$password);
     		$fullname =  mysqli_real_escape_string($con,$fullname);
     		$agency =  mysqli_real_escape_string($con,$agency);
+            $role = mysqli_real_escape_string($con,$role);
 
     	    $password = password_hash($password, PASSWORD_BCRYPT);  //encrypt the password 
-    	 	$sql = "INSERT INTO users (username,password,fullname,agency) VALUES('$username','$password','$fullname','$agency')" ;
+    	 	$sql = "INSERT INTO users (username,password,fullname,agency,role) VALUES('$username','$password','$fullname','$agency','$role')" ;
     	 	mysqli_query($con,$sql);
 
             echo 'registered';

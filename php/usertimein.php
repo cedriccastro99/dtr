@@ -18,21 +18,47 @@
             $setup = $_POST['data']['setup'];
 
             $accomplished = '';
+
+            $sql = "INSERT INTO entry (user_id,month,day,year,setup) VALUES('$userid','$month','$day','$year','$setup')" ;
+            mysqli_query($con,$sql);
+
+            $entry_id = mysqli_insert_id($con);
             
             if($setup == '1'){
-                $sql = "INSERT INTO entry (user_id,month,day,year,am_in,setup) VALUES('$userid','$month','$day','$year','$time','$setup')" ;
+                $sql = "INSERT INTO time (entry_id,type,time) VALUES ($entry_id ,'$type','$time')";
                 mysqli_query($con,$sql);
             }else{
                 $accomplished = $_POST['data']['accomplished'];
-                $sql = "INSERT INTO entry (user_id,month,day,year,am_in,am_out,pm_in,pm_out,setup) VALUES('$userid','$month','$day','$year','$time','$time','$time','$time','$setup')" ;
+
+                $sql = "INSERT INTO time (entry_id,type,time) 
+                        VALUES ($entry_id ,'am_in','$time'),
+                            ($entry_id ,'am_out','$time'),
+                            ($entry_id ,'pm_in','$time'),
+                            ($entry_id ,'pm_out','$time')";
                 mysqli_query($con,$sql);
 
-                $sql = "INSERT INTO `accomplished_work`(`user_id`, `accomplished_work`, `month`, `day`, `year`) VALUES ('$userid','$accomplished','$month','$day','$year')";
+                $sql = "INSERT INTO `accomplished_work`(`entry_id`, `accomplished_work`, `month`, `day`, `year`) VALUES ($entry_id,'$accomplished','$month','$day','$year')";
                 mysqli_query($con,$sql);
             }
+
+            $m = (int)$month;
+            $d = (int)$day;
+            $y = (int)$year;
             
-            $sql = "SELECT * FROM  entry WHERE `user_id` = $userid AND `month` = '$month' AND `day` = '$day' AND `year` = '$year'";
-            $stm = $pdo->query($sql);
+            $query_getdata = "SELECT a.entry_id,a.month,a.day,a.year,
+                    ( SELECT b.time FROM time b WHERE b.type = 'am_in' AND entry_id = a.entry_id ) as am_in,
+                    ( SELECT b.time FROM time b WHERE b.type = 'am_out' AND entry_id = a.entry_id ) as am_out,
+                    ( SELECT b.time FROM time b WHERE b.type = 'pm_in' AND entry_id = a.entry_id) as pm_in,
+                    ( SELECT b.time FROM time b WHERE b.type = 'pm_out' AND entry_id = a.entry_id) as pm_out,
+                    a.setup
+                    FROM entry a
+                    WHERE a.entry_id = $entry_id
+                    AND a.user_id = $userid
+                    AND a.month = $m 
+                    AND a.day = $d 
+                    AND a.year = $y";
+
+            $stm = $pdo->query($query_getdata);
             $result = $stm->fetchAll(PDO::FETCH_ASSOC);
 
             echo json_encode($result);
@@ -42,14 +68,19 @@
 
             try {
 			
-                $pdo->beginTransaction();
-                $prepared_statement = $pdo->prepare("UPDATE entry SET `pm_in` = ?  WHERE `entry_id` = ? AND `user_id` = ?");
-    
-                $prepared_statement->execute(array($time,$entry,$userid));
-    
-                $pdo->commit();
-    
-                $sql = "SELECT * FROM  entry WHERE `user_id` = $userid AND `entry_id` = $entry";
+                $sql = "INSERT INTO time (entry_id,type,time) VALUES ($entry ,'$type','$time')";
+                mysqli_query($con,$sql);
+
+                $sql = "SELECT a.entry_id,a.month,a.day,a.year,
+                    ( SELECT b.time FROM time b WHERE b.type = 'am_in' AND entry_id = a.entry_id ) as am_in,
+                    ( SELECT b.time FROM time b WHERE b.type = 'am_out' AND entry_id = a.entry_id ) as am_out,
+                    ( SELECT b.time FROM time b WHERE b.type = 'pm_in' AND entry_id = a.entry_id) as pm_in,
+                    ( SELECT b.time FROM time b WHERE b.type = 'pm_out' AND entry_id = a.entry_id) as pm_out,
+                    a.setup
+                    FROM entry a
+                    WHERE a.user_id = $userid
+                    AND a.entry_id = $entry";
+
                 $stm = $pdo->query($sql);
                 $result = $stm->fetchAll(PDO::FETCH_ASSOC);
 

@@ -12,16 +12,36 @@ $(document).ready(function(){
         Successfully registered!
     </div>`;
 
+    function fullnameFormat(fname,lname,mname){
+        const str = `${fname} ${mname} ${lname}`
+
+        const arr = str.split(" ");
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+        
+        }
+
+        const str2 = arr.join(" ");
+        return str2
+    }
+
     $('#register-form').on('submit',function(e){
         e.preventDefault();
-        const username = $('#username').val();
-        const password = $('#password').val();
-        const fullname = $('#fullname').val();
-        const agency = $('#agency').val();
+        const firstname = $('#user-firstname').val();
+        const lastname = $('#user-lastname').val();
+        const middle_initial = $('#user-mi').val();
+        const agency = $('#user-agency').val();
+        const role = $('#role').val();
+
+        const username = `${firstname.split(' ').join('')}.${lastname.split(' ').join('')}`
+        const password = `${firstname.split(' ').join('')}${lastname.split(' ').join('')}`
+
+        const fullname = fullnameFormat(firstname,lastname,middle_initial)
 
         const alertBox = $('#alert_box').empty();
 
-        if(username === '' || password === '' || fullname === '' || agency === ''){
+        if(username === '' || fullname === '' || agency === '' || role === '' || password === ''){
             
             alertBox.append(alert_message);
 
@@ -37,12 +57,13 @@ $(document).ready(function(){
                 username : username,
                 password : password,
                 fullname : fullname,
-                agency : agency
+                agency : agency,
+                role : role
             }
 
             $.ajax({
                 method : 'POST',
-                url : '../php/register.php',
+                url : './php/register.php',
                 data : {data : newUser , action : 'register'},
                 success : function(data){
                     if(data === 'exist'){
@@ -60,16 +81,15 @@ $(document).ready(function(){
 
                         setTimeout(()=>{
                             $('.alert').fadeOut('slow');
-                            $('#username').val('')
-                            $('#password').val('');
-                            $('#fullname').val('');
-                            $('#agency').val('');
+                            $('#user-firstname').val('');
+                            $('#user-lastname').val('');
+                            $('#user-mi').val('');
+                            $('#user-agency').val('');
+                            $('#role').val('');
                         },1500)
                     }
                 }
             })
-
-            
 
         }
 

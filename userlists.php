@@ -33,29 +33,14 @@
                 <span type="button" data-bs-target="#sidebar" data-bs-toggle="collapse">
                     <img src="./image/bars-solid.svg" alt="menu-button" style="width:30px;height:30px;"> 
                 </span>
-                <?php if($_SESSION['role'] == 'Staff'){ ?>
-                    <?php  include('./templates/staff.php') ?>
-                <?php }?>
-                <?php if($_SESSION['role'] == 'Admin'){ ?>
-                    <?php  include('./templates/admin.php') ?>
-                <?php }?>
             </main>
     </div>
 </div>
-
-
-<?php include('./templates/toasts.php') ?>
-
-
 </body>
 </html>
 
 
 
 <script>
-    localStorage.setItem('page',JSON.stringify('dashboard'))
-    
-    const date = new Date();
-
-    $('#clock').text(`${date.toLocaleString('en-US', { hour12: true })}`);
+    localStorage.setItem('page',JSON.stringify('userlists'))
 </script>

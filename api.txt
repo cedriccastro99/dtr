@@ -3,3 +3,12 @@ $.getJSON("https://holidays.abstractapi.com/v1/?api_key=9deb86c34d1b4696b7ff6379
 })
 
 api  = https://calendarific.com/api/v2/holidays?api_key=499b14be2ab015a560edd2aae50ba23d174ffb93&country=PH&year=2022
+INSERT INTO `entry`(`user_id`, `month`, `day`, `year`, `setup`) VALUES (2,'07','12','2022',2);
+
+INSERT INTO time (entry_id,type,time) VALUES 
+(23 ,'am_in','7:00:00 AM'),
+(23 ,'am_out','12:00:00 PM'),
+(23 ,'pm_in','1:00:00 PM'),
+(23 ,'pm_out','5:00:00 AM');
+
+INSERT INTO accomplished_work (entry_id,accomplished_work,month,day,year) VALUES (23,'test3','07','12','2022');

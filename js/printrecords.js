@@ -248,16 +248,4 @@ $(document).ready(function(){
         $('.print-record').printThis()
     })
 
-    $('#logout-btn').on('click',function(){
-        $.ajax({
-            method : 'POST',
-            url : './php/logout.php',
-            data : {action : 'logout'},
-            success : function(data){
-                if(data === 'logout'){
-                    window.location = "./views/login.php"
-                }
-            }         
-        })
-    })
 })

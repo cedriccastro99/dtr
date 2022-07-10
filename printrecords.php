@@ -3,6 +3,10 @@
     if(!isset($_SESSION['user_id'])){
         header('location:./views/login.php');
     }
+
+    if($_SESSION['role'] == 'Admin'){
+        header('location:./');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

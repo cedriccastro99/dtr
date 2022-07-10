@@ -45,7 +45,6 @@
         <span id="alert_box">
         </span>
         <button type="submit" id="login-button" class="btn btn-primary">Login</button>
-        <p>Need an account ? <span><a href="../views/register.php">Register</a></span></p>
     </form>
 
 </body>

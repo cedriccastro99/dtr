@@ -29,18 +29,6 @@ $(document).ready(function(){
         $('#clock').text(`${date.toLocaleString('en-US', { hour12: true })}`)
     },1000)
 
-    $('#logout-btn').on('click',function(){
-        $.ajax({
-            method : 'POST',
-            url : './php/logout.php',
-            data : {action : 'logout'},
-            success : function(data){
-                if(data === 'logout'){
-                    window.location = "./views/login.php"
-                }
-            }         
-        })
-    })
 
     function checkEntry(entry){
 
@@ -188,6 +176,7 @@ $(document).ready(function(){
                     setup : setup,
                     accomplished
                 }
+
                 $.ajax({
                     method : 'POST',
                     url : './php/usertimein.php',
@@ -207,6 +196,8 @@ $(document).ready(function(){
                 time : time,
                 type : 'pm_in'
             }
+
+            console.log(dateToday);
 
             $.ajax({
                 method : 'POST',

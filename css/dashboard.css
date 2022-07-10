@@ -1,3 +1,14 @@
 #time-in-out{
     margin-top: 215px;
 }
+
+#table-container{
+    display:block;
+    overflow:auto;
+    height:90vh;
+}
+
+#records-table{
+    max-width: 60em;
+    margin: 0 auto;
+}
