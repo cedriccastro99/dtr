@@ -107,6 +107,15 @@
         $stm = $pdo->query($sql);
         $result = $stm->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
+        exit();
+    }else if(isset($_SESSION['user_id']) && $_GET['action'] == 'getusers'){
+        $sql = "SELECT user_id,username,fullname,agency,role
+                FROM users";
+
+        $stm = $pdo->query($sql);
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        exit();
     }
 
 ?>
