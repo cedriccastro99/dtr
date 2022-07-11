@@ -82,7 +82,7 @@
 
         $sql = "SELECT DISTINCT a.*
             FROM accomplished_work a
-            LEFT JOIN entry b ON b.entry_id = b.entry_id
+            LEFT JOIN entry b ON b.entry_id = a.entry_id
             WHERE b.user_id = $userid
             AND a.month = $month AND a.year = $year AND a.day >= $from AND a.day <= $to";
         $stm = $pdo->query($sql);
