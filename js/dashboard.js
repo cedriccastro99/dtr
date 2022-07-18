@@ -87,7 +87,7 @@ $(document).ready(function(){
 
         if(type == 'in'){
 
-            if(setup === '2'){
+            if(setup === '2' || setup === 2){
                 alertBox.append(work_from_home);
             }else{
                 alertBox.append(timein_success);

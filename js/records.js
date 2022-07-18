@@ -26,7 +26,7 @@ $(document).ready(function(){
 
                         let row = '';
 
-                        if(entry.setup === '2'){
+                        if(entry.setup === '2' || entry.setup === 2){
                             row = `<tr>
                                 <td>${entry.month}</td>
                                 <td>${entry.day}</td>

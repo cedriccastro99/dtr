@@ -126,7 +126,7 @@ $(document).ready(function(){
                     <td style="letter-spacing:5px;"><b>Y</b></td>
                 </tr>` 
             }else if(date.length !== 0){
-                if(date[0].setup === '1'){
+                if(date[0].setup === '1' || date[0].setup === 1){
                     row = `<tr>
                         <td>${i}</td>
                         <td>${date[0].am_in === null ? '---' : date[0].am_in}</td>
@@ -134,7 +134,7 @@ $(document).ready(function(){
                         <td>${date[0].pm_in === null ? '---' : date[0].pm_in}</td>
                         <td>${date[0].pm_out === null ? '---' : date[0].pm_out}</td>
                     </tr>` 
-                }else if(date[0].setup === '2'){
+                }else if(date[0].setup === '2' || date[0].setup === 2){
                     row = `<tr>
                         <td>${i}</td>
                         <td colspan="4" style="letter-spacing:5px;"><b>WORK FROM HOME</b></td>
