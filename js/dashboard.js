@@ -23,6 +23,15 @@ $(document).ready(function(){
     
     let userEntry;
     const toast = $('#liveToast');
+    
+    //test for automatic time check
+    // Object.prototype.twoDigits = function () {
+    //     return ("0" + this).slice(-2);
+    // }
+
+    // let timeOfDay = date.getHours().twoDigits() + ':' + date.getMinutes().twoDigits();
+
+    // console.log(timeOfDay)
 
     setInterval(()=>{
         const date = new Date();
@@ -171,6 +180,7 @@ $(document).ready(function(){
                     day : day,
                     month : month,
                     year : year,
+                    // time : '08:00:00 AM',
                     time : time,
                     type : 'am_in',
                     setup : setup,

@@ -25,7 +25,12 @@
             $entry_id = mysqli_insert_id($con);
             
             if($setup == '1'){
-                $sql = "INSERT INTO time (entry_id,type,time) VALUES ($entry_id ,'$type','$time')";
+                //not automatic
+                $sql = "INSERT INTO time (entry_id,type,time) 
+                        VALUES ($entry_id ,'$type','$time'),
+                                ($entry_id ,'am_out','12:00:00 PM'),
+                                ($entry_id ,'pm_in','01:00:00 PM')";
+
                 mysqli_query($con,$sql);
             }else{
                 $accomplished = $_POST['data']['accomplished'];
